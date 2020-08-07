@@ -1,0 +1,25 @@
+---
+- name: Agent Installation
+  hosts: 18.222.153.28,
+  user: centos
+  connection: ssh
+  become: yes
+  become_method: sudo
+  tasks:
+  - name: Install packages
+    package:
+      name: "{{item}}"
+      state: present            #absent latest
+    with_items:
+    - httpd
+    - php
+  - name: Add users
+    user:
+      name: "{{item}}"
+      state: present
+    with_items:
+    - Bob
+    - ben
+    - lisa
+    - katty
+    
